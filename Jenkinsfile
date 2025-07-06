@@ -12,7 +12,7 @@ pipeline {
             steps {
                 sh '''
                 python3 -m venv venv
-                source venv/bin/activate
+                . ./venv/bin/activate
                 pip install --upgrade pip
                 pip install -r requirements.txt
                 '''
@@ -22,7 +22,7 @@ pipeline {
         stage('Deploy with Ansible') {
             steps {
                 sh '''
-                source venv/bin/activate
+                . ./venv/bin/activate
                 ansible-playbook -i inventory.ini deploy.yml
                 '''
             }
