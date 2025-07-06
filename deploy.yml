@@ -1,8 +1,9 @@
 - name: Deploy Flask App
   hosts: localhost
   tasks:
-    - name: Stop existing app
+    - name: Stop existing app (if running)
       shell: pkill -f app.py || true
+      ignore_errors: yes
 
     - name: Run Flask app in background
-      shell: nohup python3 app.py &
+      shell: nohup ./venv/bin/python3 app.py &
