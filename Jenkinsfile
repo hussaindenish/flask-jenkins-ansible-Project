@@ -10,13 +10,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                python3 -m venv venv
+                source venv/bin/activate
+                pip install --upgrade pip
+                pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Deploy with Ansible') {
             steps {
-                sh 'ansible-playbook -i inventory.ini deploy.yml'
+                sh '''
+                source venv/bin/activate
+                ansible-playbook -i inventory.ini deploy.yml
+                '''
             }
         }
     }
