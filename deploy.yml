@@ -1,29 +1,8 @@
----
-- name: Deploy Flask App Locally
-  hosts: web
-  become: true
-
+- name: Deploy Flask App
+  hosts: localhost
   tasks:
-    - name: Install required system packages
-      apt:
-        name: ['python3-pip']
-        state: present
-        update_cache: yes
+    - name: Stop existing app
+      shell: pkill -f app.py || true
 
-    - name: Install Flask
-      pip:
-        name: flask
-
-    - name: Copy application file
-      copy:
-        src: app.py
-        dest: /opt/flaskapp/app.py
-        mode: '0755'
-        force: yes
-
-    - name: Start Flask app
-      shell: |
-        nohup python3 /opt/flaskapp/app.py > /opt/flaskapp/output.log 2>&1 &
-      args:
-        executable: /bin/bash
-
+    - name: Run Flask app in background
+      shell: nohup python3 app.py &
