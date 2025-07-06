@@ -3,6 +3,7 @@
   tasks:
     - name: Stop existing app (if running)
       shell: pkill -f app.py || true
-
+      ignore_errors: yes
+      
     - name: Run Flask app in background
       shell: nohup /var/lib/jenkins/workspace/Flask-CI-CD/venv/bin/python3 /var/lib/jenkins/workspace/Flask-CI-CD/app.py > flask.log 2>&1 &
