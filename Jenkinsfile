@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone Repo') {
+        stage('Checkout Done') {
             steps {
-                git 'https://github.com/hussaindenish/flask-jenkins-ansible-Project.git'
+                echo 'Repository already checked out by Jenkins.'
             }
         }
 
@@ -21,4 +21,3 @@ pipeline {
         }
     }
 }
-
