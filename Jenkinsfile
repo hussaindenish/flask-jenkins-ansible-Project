@@ -1,18 +1,24 @@
 pipeline {
-  agent any
+    agent any
 
-  stages {
-    stage('Clone Repo') {
-      steps {
-        git 'https://github.com/hussaindenish/flask-jenkins-ansible-Project.git'
-      }
-    }
+    stages {
+        stage('Clone Repo') {
+            steps {
+                git 'https://github.com/hussaindenish/flask-jenkins-ansible-Project.git'
+            }
+        }
 
-    stage('Deploy with Ansible') {
-      steps {
-        sh 'ansible-playbook -i inventory.ini deploy.yml'
-      }
+        stage('Install Dependencies') {
+            steps {
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
+
+        stage('Deploy with Ansible') {
+            steps {
+                sh 'ansible-playbook -i inventory.ini deploy.yml'
+            }
+        }
     }
-  }
 }
 
