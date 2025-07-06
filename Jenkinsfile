@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Clone Repo') {
       steps {
-        git 'https://github.com/hussaindenish/ci-cd-pipeline.git'
+        git 'https://github.com/hussaindenish/flask-jenkins-ansible-Project.git'
       }
     }
 
